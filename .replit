@@ -1,0 +1,23 @@
+run = "npm run dev"
+entrypoint = "server/index-dev.ts"
+modules = ["nodejs-20", "postgresql-16"]
+hidden = [".config", "dist", "node_modules"]
+
+[nix]
+channel = "stable-24_05"
+
+[env]
+NODE_ENV = "development"
+
+[deployment]
+deploymentTarget = "autoscale"
+build = ["npm", "run", "build"]
+run = ["npm", "run", "start"]
+
+[[ports]]
+localPort = 5001
+externalPort = 80
+
+[[ports]]
+localPort = 5000
+externalPort = 3000
